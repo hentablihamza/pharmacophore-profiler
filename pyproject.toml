@@ -1,0 +1,87 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pharmprof"
+version = "0.1.0"
+description = "Ligand-based pharmacophore profiling: SMARTS pattern counts, enrichment statistics, library filters, and alert flagging."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Hentabli Hamza" }]
+keywords = [
+    "pharmacophore",
+    "cheminformatics",
+    "rdkit",
+    "virtual-screening",
+    "SMARTS",
+    "ligand-based",
+    "drug-discovery",
+    "PAINS",
+    "ADMET",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+dependencies = [
+    "rdkit>=2023.9",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scipy>=1.11",
+    "scikit-learn>=1.3",
+    "matplotlib>=3.7",
+    "pillow>=10.0",
+    "tqdm>=4.66",
+    "joblib>=1.3",
+    "typer>=0.12",
+    "rich>=13.0",
+    "pyarrow>=14.0",
+]
+
+[project.optional-dependencies]
+notebooks = ["jupyter>=1.0", "nbconvert>=7.10", "ipykernel>=6.29"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[project.scripts]
+pharmprof = "pharmprof.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/hentablihamza/pharmacophore-profiler"
+Issues = "https://github.com/hentablihamza/pharmacophore-profiler/issues"
+
+[tool.setuptools.packages.find]
+include = ["pharmprof*"]
+
+[tool.setuptools.package-data]
+pharmprof = [
+    "pattern_data/*.tsv",
+    "pattern_data/*.fdef",
+    "pattern_data/*.md",
+    "pattern_data/licenses/*",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::UserWarning",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+exclude = ["notebooks/*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4"]
+ignore = ["E501", "B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["E402"]

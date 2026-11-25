@@ -1,0 +1,28 @@
+# caches and build artefacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# downloaded / generated caches
+data/cache/
+data/dude-egfr/raw/
+*.parquet
+!data/dude-egfr/egfr_subset.parquet
+
+# environments
+.venv/
+venv/
+env/
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# packaging
+.eggs/
